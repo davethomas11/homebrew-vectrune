@@ -7,7 +7,7 @@ This repository contains the Homebrew formula for installing the VectRune CLI to
 First, add this tap:
 
 ```sh
-brew tap davethomas11/vectrune
+brew tap davethomas11/homebrew-vectrune
 ```
 
 Then install VectRune:
