@@ -1,4 +1,4 @@
-class VectRune < Formula
+class Vectrune < Formula
   desc "VectRune CLI tool"
   homepage "https://github.com/davethomas11/vectrune"
   version "0.1.1"
