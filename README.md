@@ -1,47 +1,40 @@
 # homebrew-vectrune
 
-This repository contains the Homebrew formula for installing the VectRune CLI tool on macOS (Intel & Apple Silicon) and Linux.
+This repository hosts the Homebrew tap for the VectRune CLI binaries that are built in `davethomas11/vectrune`.
 
-## Installation
-
-First, add this tap:
+## Install
 
 ```sh
 brew tap davethomas11/homebrew-vectrune
-```
-
-Then install VectRune:
-
-```sh
 brew install vectrune
 ```
 
-## Supported Platforms
+Homebrew automatically selects the correct binary:
+- macOS Apple Silicon (`on_macos` + `on_arm`)
+- macOS Intel (`on_macos` + `on_intel`)
+- Linux x86_64 (`on_linux` + `on_intel`, glibc preferred over musl)
 
-- macOS (Intel/x86_64 and Apple Silicon/arm64)
-- Linux (x86_64)
+Additional Linux ARM binaries can be added as soon as they appear on the release page—the formula already has the `on_linux`/`on_arm` hooks.
 
-The correct binary for your platform will be installed automatically.
+## Updating the formula
 
-## Updating the Formula
-
-To update the formula to the latest release, run the provided script:
+There is a helper script that pulls the latest GitHub release, downloads every published archive, recomputes the SHA-256 checksums, and rewrites `vectrune.rb`.
 
 ```sh
-pip3 install requests
-python3 update_formula.py
+python3 -m pip install --upgrade requests
+GITHUB_TOKEN="<token with repo scope>" python3 update_formula.py
 ```
 
-This script will:
-- Fetch the latest release from GitHub
-- Download each binary asset
-- Compute the sha256 for each asset
-- Update `vectrune.rb` with the new version, URLs, and sha256 values
+Providing `GITHUB_TOKEN` keeps API calls authenticated so the script does not hit the anonymous rate limit while downloading assets.
+
+Homebrew taps typically track only the latest stable release. Publish a new release in `davethomas11/vectrune`, rerun the script (or workflow below), and bump the formula—no need to keep older releases around unless you want a `@previous` formula.
 
 ## Contributing
 
-If you want to update the formula for a new release, make sure the new binaries are available on the [VectRune GitHub Releases page](https://github.com/davethomas11/vectrune/releases), then run the update script as described above.
+1. Confirm the new release assets exist on the [VectRune release page](https://github.com/davethomas11/vectrune/releases).
+2. Run `update_formula.py` locally or trigger the GitHub Action.
+3. Open a PR with the regenerated `vectrune.rb` if the automation did not push directly.
 
 ## License
 
-See [VectRune project](https://github.com/davethomas11/vectrune) for license details.
+See the upstream [VectRune project](https://github.com/davethomas11/vectrune) for license information.

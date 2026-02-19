@@ -16,8 +16,10 @@ class Vectrune < Formula
   end
 
   on_linux do
+    on_intel do
       url "https://github.com/davethomas11/vectrune/releases/download/v0.1.1/vectrune-linux-x86_64.tar.gz"
       sha256 "544fd677c283a3a3adc906f36e3efc83ff4fb91fe951ab034e413801a35aa7e4"
+    end
   end
 
   def install
