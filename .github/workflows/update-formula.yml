@@ -2,8 +2,14 @@ name: update-formula
 
 on:
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Optional tag description for the run"
+        required: false
   repository_dispatch:
     types: [vectrune-release]
+  release:
+    types: [published]
 
 permissions:
   contents: write
@@ -21,14 +27,17 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: pip
 
       - name: Install dependencies
-        run: python -m pip install --upgrade pip requests
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Run update script
         id: updater
         env:
-          GITHUB_TOKEN: ${{ secrets.VECTRUNE_RELEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.VECTRUNE_RELEASE_TOKEN != '' && secrets.VECTRUNE_RELEASE_TOKEN || secrets.GITHUB_TOKEN }}
         run: |
           python update_formula.py
           VERSION=$(python - <<'PY'

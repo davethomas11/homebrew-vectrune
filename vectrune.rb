@@ -27,13 +27,6 @@ class Vectrune < Formula
     end
   end
 
-  on_windows do
-    on_intel do
-      url "https://github.com/davethomas11/vectrune/releases/download/v0.1.4/vectrune.exe-windows-x86_64.tar.gz"
-      sha256 "f823a8259b79d443ea590170e63db8b7a5f50b20aae97fadeb5ad16f94e1e881"
-    end
-  end
-
   def install
     bin.install "vectrune"
   end

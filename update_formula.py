@@ -10,13 +10,12 @@ FORMULA_PATH = Path("vectrune.rb")
 API_ROOT = f"https://api.github.com/repos/{GITHUB_REPO}"
 
 ASSET_PATTERNS = {
-    "macos-arm64": re.compile(r"macos-arm64"),
-    "macos-x86_64": re.compile(r"macos-x86_64"),
-    "linux-x86_64": re.compile(r"linux-x86_64-gnu"),
-    "linux-x86_64-musl": re.compile(r"linux-x86_64-musl"),
-    "linux-arm64": re.compile(r"linux-arm64"),
-    "linux-armv7": re.compile(r"linux-armv7"),
-    "windows-x86_64": re.compile(r"windows-x86_64"),
+    "macos-arm64": re.compile(r"macos-arm64", re.IGNORECASE),
+    "macos-x86_64": re.compile(r"macos-x86_64", re.IGNORECASE),
+    "linux-x86_64": re.compile(r"linux-x86_64(?!-musl)", re.IGNORECASE),
+    "linux-x86_64-musl": re.compile(r"linux-x86_64-musl", re.IGNORECASE),
+    "linux-arm64": re.compile(r"linux-arm64", re.IGNORECASE),
+    "linux-armv7": re.compile(r"linux-armv7", re.IGNORECASE),
 }
 
 PLATFORM_SLOTS = [
@@ -27,9 +26,6 @@ PLATFORM_SLOTS = [
     ("on_linux", [
         ("on_arm", ["linux-arm64", "linux-armv7"]),
         ("on_intel", ["linux-x86_64", "linux-x86_64-musl"]),
-    ]),
-    ("on_windows", [
-        ("on_intel", ["windows-x86_64"]),
     ]),
 ]
 
@@ -59,11 +55,16 @@ def collect_assets(release):
     for asset in release.get("assets", []):
         name = asset.get("name", "")
         for key, pattern in ASSET_PATTERNS.items():
+            if key in assets:
+                continue
             if pattern.search(name):
                 assets[key] = {
                     "url": asset["browser_download_url"],
                     "sha256": download_and_sha256(asset["browser_download_url"]),
                 }
+    missing = sorted(set(ASSET_PATTERNS) - set(assets))
+    if missing:
+        print(f"warning: missing release assets for {', '.join(missing)}")
     return assets
 
 
