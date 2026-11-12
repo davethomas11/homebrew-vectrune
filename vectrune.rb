@@ -1,29 +1,29 @@
 class Vectrune < Formula
   desc "VectRune CLI tool"
   homepage "https://github.com/davethomas11/vectrune"
-  version "0.3.1"
+  version "0.3.2"
 
   on_macos do
     on_arm do
-      url "https://github.com/davethomas11/vectrune/releases/download/v0.3.1/vectrune-macos-arm64.tar.gz"
-      sha256 "def9277e29c0a7ca51d9f0f18330c898a3676612648da64007591cdbb95d53d2"
+      url "https://github.com/davethomas11/vectrune/releases/download/v0.3.2/vectrune-macos-arm64.tar.gz"
+      sha256 "bf9e5ed5b825c4846d48fd07862f15978021cc15edcb7aa89f52575102fa6258"
     end
 
     on_intel do
-      url "https://github.com/davethomas11/vectrune/releases/download/v0.3.1/vectrune-macos-x86_64.tar.gz"
-      sha256 "a3ea53ea82371953b145a534a895183f58ae1598a98b55d73e90ec44a8e0357e"
+      url "https://github.com/davethomas11/vectrune/releases/download/v0.3.2/vectrune-macos-x86_64.tar.gz"
+      sha256 "a9c0d33184e41d8857b66cf92514b56010f997678415ab05a3acde1b850caf3b"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/davethomas11/vectrune/releases/download/v0.3.1/vectrune-linux-arm64.tar.gz"
-      sha256 "ff2472fedce6a22a6de68c30f9b515db9210f13522aa1fc6f29e279455862abb"
+      url "https://github.com/davethomas11/vectrune/releases/download/v0.3.2/vectrune-linux-arm64.tar.gz"
+      sha256 "b474d7002792de853e0bc5609f99ecd2f3a4918e2b87c44193faffa0f2969236"
     end
 
     on_intel do
-      url "https://github.com/davethomas11/vectrune/releases/download/v0.3.1/vectrune-linux-x86_64.tar.gz"
-      sha256 "90e1f6cce02107c47ffc26a9dbfbb34abc2e90ed949a27fb485c47198c44c296"
+      url "https://github.com/davethomas11/vectrune/releases/download/v0.3.2/vectrune-linux-x86_64.tar.gz"
+      sha256 "fc06fda5eaf6804abca12ce685dfc8dc793de2e9e9fc226680740da35ee70c6a"
     end
   end
 
