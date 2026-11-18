@@ -49,6 +49,11 @@ jobs:
           )
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
+      - name: Verify formula and offline manual installation
+        run: |
+          python -m unittest test_update_formula
+          ruby -c vectrune.rb
+
       - name: Commit changes
         id: commit
         run: |

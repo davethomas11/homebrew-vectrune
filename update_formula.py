@@ -102,6 +102,11 @@ def build_formula(version, assets):
         "",
         "  def install",
         '    bin.install "vectrune"',
+        "    # Older release archives contain only the binary.",
+        '    if (buildpath/"man").directory?',
+        '      man1.install "man/man1/vectrune.1"',
+        '      man7.install "man/man7/vectrune-language.7"',
+        "    end",
         "  end",
         "end",
     ])

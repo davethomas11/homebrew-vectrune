@@ -11,6 +11,14 @@ brew install vectrune
 
 That `brew tap` command is all you need—Homebrew will automatically pull this repository as the `davethomas11/homebrew-vectrune` tap and install the `vectrune` formula from it.
 
+Releases containing offline manuals also install `man vectrune` (CLI commands
+and options) and `man vectrune-language` (language/library reference). The
+manuals are generated upstream from the release-tagged shared docs inventory
+using a `.vect` renderer and shipped in each platform archive under `man/man1/`
+and `man/man7/`. Installation needs no documentation-generation tooling.
+Older binary-only archives remain installable without manuals. The formula
+updater preserves these installation rules when updating release URLs/hashes.
+
 ## Supported platforms
 
 - macOS on Apple Silicon (`on_macos` + `on_arm`)
